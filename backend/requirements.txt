@@ -10,3 +10,10 @@ fastapi==0.115.0
 uvicorn==0.30.6
 python-multipart==0.0.12
 pydantic==2.9.2
+
+# PDD-AMS Core
+mediapipe==0.10.14
+opencv-python==4.10.0.84
+faiss-cpu==1.8.0.post1
+tensorflow==2.17.0
+python-docx==1.1.2
