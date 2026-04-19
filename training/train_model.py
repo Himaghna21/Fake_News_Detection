@@ -82,7 +82,7 @@ def clean_data(df):
     initial = len(df)
     df = df.dropna(subset=["title", "text"])
     df = df.drop_duplicates(subset=["title", "text"])
-    print(f"[INFO] Cleaned: {initial} → {len(df)} articles (removed {initial - len(df)})")
+    print(f"[INFO] Cleaned: {initial} -> {len(df)} articles (removed {initial - len(df)})")
 
     df["content"] = df["title"] + " " + df["text"]
     return df
@@ -94,6 +94,8 @@ def clean_data(df):
 def preprocess_text(text):
     """Lowercase, remove punctuation/stopwords, lemmatize."""
     text = text.lower()
+    text = re.sub(r"^.*?\(reuters\)\s*-\s*", "", text)
+    text = text.replace("reuters", "")
     text = re.sub(r"\[.*?\]", "", text)
     text = re.sub(r"https?://\S+|www\.\S+", "", text)
     text = re.sub(r"<.*?>+", "", text)
@@ -175,7 +177,7 @@ def train_models(X_train, y_train, X_test, y_test):
             best_model = model
             best_name = name
 
-    print(f"\n★ Best model: {best_name} with accuracy {best_acc:.4f}")
+    print(f"\n* Best model: {best_name} with accuracy {best_acc:.4f}")
     return best_model, best_name, results
 
 
@@ -192,9 +194,9 @@ def save_artifacts(model, vectorizer, model_name, results):
     joblib.dump(vectorizer, vec_path)
     joblib.dump({"model_name": model_name, "results": results}, meta_path)
 
-    print(f"\n[INFO] Saved model      → {model_path}")
-    print(f"[INFO] Saved vectorizer → {vec_path}")
-    print(f"[INFO] Saved metadata   → {meta_path}")
+    print(f"\n[INFO] Saved model      -> {model_path}")
+    print(f"[INFO] Saved vectorizer -> {vec_path}")
+    print(f"[INFO] Saved metadata   -> {meta_path}")
 
 
 # ------------------------------------------------------------------ #

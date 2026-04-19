@@ -24,6 +24,8 @@ def preprocess_text(text: str) -> str:
     Must match the preprocessing used during model training.
     """
     text = text.lower()
+    text = re.sub(r"^.*?\(reuters\)\s*-\s*", "", text)
+    text = text.replace("reuters", "")
     text = re.sub(r"\[.*?\]", "", text)
     text = re.sub(r"https?://\S+|www\.\S+", "", text)
     text = re.sub(r"<.*?>+", "", text)
