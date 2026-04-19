@@ -15,9 +15,7 @@ env/
 # Data files
 data/*.csv
 
-# Model artifacts
-model/*.pkl
-model/*.joblib
+# Model artifacts are needed for deployment
 
 # Node
 node_modules/
